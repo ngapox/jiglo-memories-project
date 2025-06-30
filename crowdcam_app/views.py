@@ -4,6 +4,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event
 from .forms import PhotoForm # Import our new form
 
+def homepage_view(request):
+    # Get all event objects, ordered by the most recent date first
+    events = Event.objects.all().order_by('-event_date')
+    context = {
+        'events': events
+    }
+    return render(request, 'crowdcam_app/homepage.html', context)
+
 def event_detail_view(request, unique_code):
     event = get_object_or_404(Event, unique_code=unique_code)
 

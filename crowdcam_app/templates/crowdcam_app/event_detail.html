@@ -1,39 +1,27 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrowdCam | {{ event.name }}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    
-    <header class="header">
-        <h1>{{ event.name }}</h1>
+{% extends 'crowdcam_app/base.html' %}
+
+{% block content %}
+    <div class="event-title">
+        <h2>{{ event.name }}</h2>
         <p>{{ event.event_date }}</p>
-    </header>
+    </div>
 
-    <main>
-        <div class="upload-form">
-            <h2>Upload a Memory</h2>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Upload Photo</button>
-            </form>
-        </div>
+    <div class="upload-form">
+        <h3>Upload a Memory</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload Photo</button>
+        </form>
+    </div>
 
-        <div class="photo-grid">
-            {% for photo in photos %}
-                <div class="photo-item">
-                    <img src="{{ photo.image.url }}" alt="Photo for {{ event.name }}">
-                </div>
-            {% empty %}
-                <p style="text-align: center;">No photos have been uploaded yet. Be the first!</p>
-            {% endfor %}
-        </div>
-    </main>
-
-</body>
-</html>
+    <div class="photo-grid">
+        {% for photo in photos %}
+            <div class="photo-item">
+                <img src="{{ photo.image.url }}" alt="Photo for {{ event.name }}">
+            </div>
+        {% empty %}
+            <p style="text-align: center;">No photos have been uploaded yet. Be the first!</p>
+        {% endfor %}
+    </div>
+{% endblock %}

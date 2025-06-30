@@ -80,3 +80,35 @@ button:hover {
 .photo-grid img:hover {
     transform: scale(1.05);
 }
+
+/* static/css/style.css (add to bottom) */
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-card {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h3 {
+    margin: 0 0 5px 0;
+    color: #3498db;
+}
+
+.event-card p {
+    margin: 0;
+    color: #7f8c8d;
+}
