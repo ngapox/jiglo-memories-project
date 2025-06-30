@@ -16,3 +16,11 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Photo(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='photos')
+    image = models.ImageField(upload_to='event_photos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Photo for {self.event.name} uploaded at {self.uploaded_at.strftime('%Y-%m-%d %H:%M')}"
