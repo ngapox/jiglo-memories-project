@@ -5,7 +5,7 @@ from django.contrib.auth import login # import login
 from django.contrib.auth.forms import UserCreationForm # import the form
 from django.contrib.auth.decorators import login_required
 from .models import Event
-from .forms import PhotoForm # Import our new form
+from .forms import PhotoForm, EventForm # Import our new form
 
 @login_required
 def dashboard_view(request):
@@ -58,3 +58,24 @@ def event_detail_view(request, unique_code):
     }
 
     return render(request, 'crowdcam_app/event_detail.html', context)
+
+@login_required
+def create_event_view(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            # Create the event object in memory but don't save to the database yet
+            event = form.save(commit=False)
+            # Assign the currently logged-in user as the host
+            event.host = request.user
+            # Now, save the event to the database
+            event.save()
+            # Redirect to the user's dashboard where they'll see their new event
+            return redirect('dashboard')
+    else:
+        form = EventForm()
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'crowdcam_app/create_event.html', context)

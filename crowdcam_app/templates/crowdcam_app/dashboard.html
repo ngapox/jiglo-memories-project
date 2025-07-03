@@ -4,6 +4,7 @@
     <div class="dashboard-header">
         <h2>My Events Dashboard</h2>
         <p>Here are all the events you have created.</p>
+        <a href="{% url 'create_event' %}" class="button-primary">Create New Event</a>
     </div>
     <div class="event-list">
         {% for event in events %}
@@ -12,7 +13,7 @@
                 <p>{{ event.event_date }}</p>
             </a>
         {% empty %}
-            <p style="text-align: center;">You have not created any events yet.</p>
+            <p style="text-align: center; margin-top: 20px;">You have not created any events yet.</p>
         {% endfor %}
     </div>
 {% endblock %}

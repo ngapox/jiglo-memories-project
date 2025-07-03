@@ -1,0 +1,12 @@
+{% extends "crowdcam_app/base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Create a New CrowdCam Event</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+{% endblock %}
