@@ -2,8 +2,10 @@
 
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
 
 class Event(models.Model):
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     event_date = models.DateField()
     unique_code = models.SlugField(unique=True, blank=True)
