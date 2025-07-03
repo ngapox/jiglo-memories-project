@@ -6,6 +6,7 @@ from django.conf import settings # Import settings
 from django.conf.urls.static import static # Import static
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')), 
     path('admin/', admin.site.urls),
     path('', include('crowdcam_app.urls')),
 ]

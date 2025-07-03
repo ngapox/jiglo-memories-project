@@ -112,3 +112,75 @@ button:hover {
     margin: 0;
     color: #7f8c8d;
 }
+
+/* static/css/style.css (add to bottom) */
+
+/* New Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo a {
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.main-nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: 600;
+}
+
+.main-nav span {
+    color: #34495e;
+}
+
+/* Form Container for Login/Signup */
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+/* static/css/style.css (add to bottom) */
+
+/* Style the logout button to look like a link */
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Use the same font */
+    color: #3498db; /* Use the same color as other links */
+    font-weight: 600; /* Match the font weight */
+    font-size: 1em; /* Match the font size */
+    cursor: pointer;
+    margin-left: 20px; /* Match the margin of other links */
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
+
+/* static/css/style.css (add to bottom) */
+
+/* Styles for form validation errors */
+.form-errors {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+}
+
+.form-errors ul {
+    margin: 0;
+    padding-left: 20px;
+}

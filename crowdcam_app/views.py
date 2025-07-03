@@ -1,8 +1,21 @@
 # crowdcam_app/views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import login # import login
+from django.contrib.auth.forms import UserCreationForm # import the form
 from .models import Event
 from .forms import PhotoForm # Import our new form
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user) # Log the user in immediately
+            return redirect('homepage')
+    else:
+        form = UserCreationForm()
+    return render(request, 'crowdcam_app/signup.html', {'form': form})
 
 def homepage_view(request):
     # Get all event objects, ordered by the most recent date first
