@@ -16,8 +16,7 @@
         <nav class="main-nav">
             {% if user.is_authenticated %}
                 <span>Welcome, {{ user.username }}!</span>
-
-                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                <a href="{% url 'dashboard' %}">My Events</a> <form action="{% url 'logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="logout-button">Log Out</button>
                 </form>

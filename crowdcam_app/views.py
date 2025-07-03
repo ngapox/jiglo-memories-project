@@ -3,8 +3,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login # import login
 from django.contrib.auth.forms import UserCreationForm # import the form
+from django.contrib.auth.decorators import login_required
 from .models import Event
 from .forms import PhotoForm # Import our new form
+
+@login_required
+def dashboard_view(request):
+    # Get events created ONLY by the currently logged-in user
+    events = Event.objects.filter(host=request.user).order_by('-event_date')
+    context = {
+        'events': events
+    }
+    return render(request, 'crowdcam_app/dashboard.html', context)
 
 def signup_view(request):
     if request.method == 'POST':
