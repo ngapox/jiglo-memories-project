@@ -118,32 +118,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-# ==============================================================================
-# STATIC & MEDIA FILES (Main Configuration)
-# ==============================================================================
+# settings.py (Add this entire block at the end)
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# This checks if we are on Render by looking for the CLOUDINARY_URL variable.
-if 'CLOUDINARY_URL' in os.environ:
-    # PRODUCTION SETTINGS (ON RENDER)
-    # Use Cloudinary for both static files (CSS, logos) and media files (user uploads).
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-else:
-    # LOCAL DEVELOPMENT SETTINGS
-    # Use the local 'media' folder for user uploads.
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
-
-
-# ==============================================================================
-# MISC. SETTINGS
-# ==============================================================================
-
 # Default primary key field type
+# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirects after login/logout
@@ -157,3 +141,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
+
+# This checks if we are on Render by looking for the CLOUDINARY_URL variable.
+if 'CLOUDINARY_URL' in os.environ:
+    # PRODUCTION SETTINGS (ON RENDER)
+    # Use Cloudinary for both static files (CSS, logos) and media files (user uploads).
+    CLOUDINARY_STORAGE = {
+        'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+else:
+    # LOCAL DEVELOPMENT SETTINGS
+    # Use the local 'media' folder for user uploads.
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
