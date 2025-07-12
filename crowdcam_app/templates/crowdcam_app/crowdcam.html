@@ -1,0 +1,52 @@
+{% extends "crowdcam_app/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="service-page">
+        <h2 class="section-title">CrowdCam: The Live Event Album</h2>
+
+        <div class="service-description">
+            <p>
+                Transform your guests into a team of photographers. CrowdCam creates a single, beautiful online gallery where every photo and video from every guest is automatically collected in real-time. It's the complete, authentic story of your event, told from every point of view.
+            </p>
+        </div>
+
+        <section class="info-section">
+            <h3 class="subsection-title">A Simple Process for Everyone</h3>
+             <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>You Create The Event</h3>
+                    <p>After a free sign-up, you create a private event page on our platform, giving it a name and date. We instantly generate a unique link and QR code for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>Guests Scan & Snap</h3>
+                    <p>Display the QR code at your event. Guests simply scan it with their phone's camera—no apps to download, no accounts to create. It just works.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Enjoy The Live Album</h3>
+                    <p>Every photo and video uploaded by your guests appears instantly in your private, stylish event gallery for everyone to enjoy throughout the celebration and beyond.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="service-features">
+            <h3>Key Features</h3>
+            <ul>
+                <li>Instant, real-time photo and video uploads.</li>
+                <li>Simple QR code and link access for guests.</li>
+                <li>No app downloads or guest sign-ups required.</li>
+                <li>A beautiful, private gallery for your event.</li>
+                <li>Download all high-resolution photos after the event.</li>
+            </ul>
+        </div>
+
+        <div class="service-cta">
+            <h3>Ready to create your event's story?</h3>
+            <p>Sign up for free and create your first CrowdCam event today.</p>
+            <a href="{% url 'signup' %}" class="button-primary">Get Started for Free</a>
+        </div>
+    </div>
+{% endblock %}

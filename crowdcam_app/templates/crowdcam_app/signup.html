@@ -2,18 +2,36 @@
 
 {% block content %}
   <div class="form-container">
-    <h2>Sign Up</h2>
-    <form method="post">
+    <h2>Create Your Account</h2>
+    <p class="form-subheading">Join JiGlo Memories to start creating your events.</p>
 
-      {% if form.errors %}
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
         <div class="form-errors">
-            <p>Please correct the errors below:</p>
-            {{ form.errors }}
+            {{ form.non_field_errors }}
         </div>
       {% endif %}
-      {% csrf_token %}
-      {{ form.as_p }}
+
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small class="help-text">{{ field.help_text|safe }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="field-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
       <button type="submit">Sign Up</button>
     </form>
+
+    <p class="form-alternate-action">
+      Already have an account? <a href="{% url 'login' %}">Log In</a>
+    </p>
   </div>
 {% endblock %}

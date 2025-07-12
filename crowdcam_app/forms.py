@@ -15,3 +15,9 @@ class EventForm(forms.ModelForm):
         widgets = {
             'event_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    event_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=False)
+    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}))

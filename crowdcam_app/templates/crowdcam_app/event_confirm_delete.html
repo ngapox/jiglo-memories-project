@@ -1,0 +1,15 @@
+{% extends "crowdcam_app/base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to permanently delete the event: <strong>"{{ event.name }}"</strong>?</p>
+    <p>This action cannot be undone. All associated photos will also be deleted.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="button-danger">Yes, I'm sure. Delete it.</button>
+      <a href="{% url 'dashboard' %}" class="button-secondary" style="text-align: center; margin-top: 10px;">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

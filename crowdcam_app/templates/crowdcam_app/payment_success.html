@@ -1,0 +1,21 @@
+{% extends "crowdcam_app/base.html" %}
+
+{% block content %}
+    <div class="service-page" style="text-align: center;">
+        <h2 class="section-title">Payment Successful! ✅</h2>
+
+        {% if event %}
+            <div class="service-description">
+                <p>Thank you for your payment. Your event, <strong>"{{ event.name }}"</strong>, is now active and ready to collect memories!</p>
+                <a href="{% url 'event_detail' event.unique_code %}" class="button-primary" style="width: auto; padding: 14px 40px; margin: 20px 5px 0 5px;">View Your Event</a>
+                <a href="{% url 'dashboard' %}" class="button-secondary" style="width: auto; padding: 14px 40px; margin: 20px 5px 0 5px;">Back to Dashboard</a>
+            </div>
+        {% else %}
+             <div class="service-description">
+                <p>Thank you for your payment!</p>
+                <a href="{% url 'dashboard' %}" class="button-primary" style="width: auto; padding: 14px 40px;">Back to Dashboard</a>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

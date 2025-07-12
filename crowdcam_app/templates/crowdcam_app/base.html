@@ -5,31 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiGlo Memories - CrowdCam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
     <header class="header">
-        <div class="logo">
-            <a href="{% url 'homepage' %}"><h1>JiGlo Memories</h1></a>
-        </div>
-        <nav class="main-nav">
-            {% if user.is_authenticated %}
-                <span>Welcome, {{ user.username }}!</span>
-                <a href="{% url 'dashboard' %}">My Events</a> <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-button">Log Out</button>
-                </form>
+        <div class="header-content"> <div class="logo">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="JiGlo Memories Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="{% url 'audio_guest_book' %}" class="dropdown-item">Audio Guest Book</a>
+                        <a href="{% url 'photo_booth' %}" class="dropdown-item">Photo Booth</a>
+                        <a href="{% url 'homepage' %}#events" class="dropdown-item">CrowdCam Events</a>
+                    </div>
+                </div>
 
-            {% else %}
-                <a href="{% url 'login' %}">Log In</a>
-                <a href="{% url 'signup' %}">Sign Up</a>
-            {% endif %}
-        </nav>
+                <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="nav-link">My Events</a>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Log Out</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-link">Log In</a>
+                    <a href="{% url 'signup' %}" class="nav-link">Sign Up</a>
+                {% endif %}
+            </nav>
+        </div> 
     </header>
 
-    <main>
-        {% block content %}
+    <main class="container"> {% block content %}
         {% endblock %}
     </main>
 

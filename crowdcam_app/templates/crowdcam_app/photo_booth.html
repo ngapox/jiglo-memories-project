@@ -1,0 +1,40 @@
+{% extends "crowdcam_app/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="service-page">
+        <h2 class="section-title">Custom Photo Booths</h2>
+
+        <div class="service-description">
+            <p>
+                Bring the fun to your event with our modern, open-air photo booths. Equipped with high-quality cameras, professional lighting, and a wide array of props, our booths are guaranteed to be a hit with your guests, creating instant, shareable memories.
+            </p>
+        </div>
+
+        <section class="service-gallery">
+            <h3 class="subsection-title">Unforgettable Moments</h3>
+            <div class="gallery-grid">
+                <img src="{% static 'images/photo-booth/pb-photo-1.jpg' %}" alt="Guests having fun in the photo booth">
+                <img src="{% static 'images/photo-booth/pb-photo-2.jpg' %}" alt="Custom photo strip design">
+                <img src="{% static 'images/photo-booth/pb-photo-3.jpg' %}" alt="A selection of fun props">
+            </div>
+        </section>
+
+        <div class="service-features">
+            <h3>What's Included?</h3>
+            <ul>
+                <li>Modern, open-air photo booth with professional lighting.</li>
+                <li>Unlimited high-resolution prints during your event.</li>
+                <li>A curated collection of fun and premium props.</li>
+                <li>A friendly attendant to ensure everything runs smoothly.</li>
+                <li>A digital gallery of all photos delivered after the event.</li>
+            </ul>
+        </div>
+
+        <div class="service-cta">
+            <h3>Ready to add fun to your celebration?</h3>
+            <p>Contact us today for our package options and to check availability for your event date.</p>
+            <a href="{% url 'contact' %}" class="button-primary">Request a Quote</a>
+        </div>
+    </div>
+{% endblock %}

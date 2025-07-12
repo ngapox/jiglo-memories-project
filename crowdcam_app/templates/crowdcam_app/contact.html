@@ -1,0 +1,22 @@
+{% extends "crowdcam_app/base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Contact Us</h2>
+    <p class="form-subheading">We'd love to hear about your event. Send us a message!</p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% for error in field.errors %}
+            <div class="field-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+{% endblock %}

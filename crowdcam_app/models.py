@@ -11,6 +11,10 @@ class Event(models.Model):
     unique_code = models.SlugField(unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=20.00) # Example price
+    is_paid = models.BooleanField(default=False)
+    stripe_checkout_id = models.CharField(max_length=255, blank=True)
+    
     def save(self, *args, **kwargs):
         if not self.unique_code:
             self.unique_code = slugify(self.name)

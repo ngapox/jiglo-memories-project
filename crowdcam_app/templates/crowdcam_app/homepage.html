@@ -1,15 +1,72 @@
-{% extends 'crowdcam_app/base.html' %}
+{% extends "crowdcam_app/base.html" %}
 
 {% block content %}
-    <div class="event-list">
-        <h2 style="text-align: center; margin-bottom: 30px;">Available Events</h2>
-        {% for event in events %}
-            <a href="{% url 'event_detail' event.unique_code %}" class="event-card">
-                <h3>{{ event.name }}</h3>
-                <p>{{ event.event_date }}</p>
+    <section class="hero-section">
+        <div class="hero-text-container">
+            <div class="hero-text">
+                <h2>Cherish Every Moment. Hear Every Laugh.</h2>
+                <p>JiGlo Memories offers a unique suite of services, from our signature Audio Guest Book to the interactive CrowdCam album, designed to preserve the authentic story of your event.</p>
+                <a href="#services" class="button-primary hero-button">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="info-section">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon">1</div>
+                <h3>Create Your Event</h3>
+                <p>Sign up and create a unique event page for your wedding, party, or corporate function in seconds.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">2</div>
+                <h3>Share The Link</h3>
+                <p>Share your event's unique link or QR code with your guests. No apps or sign-ups required for them.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">3</div>
+                <h3>Collect Memories</h3>
+                <p>Guests upload photos and videos directly from their phones into one beautiful, collective album.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="info-section">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-container">
+            <a href="{% url 'crowdcam' %}" class="service-card-link">
+                <div class="service-card">
+                    <h3>CrowdCam Album</h3>
+                    <p>A live, collaborative photo stream. Click to get started!</p>
+                </div>
             </a>
-        {% empty %}
-            <p>There are no events currently available.</p>
-        {% endfor %}
-    </div>
+            <a href="{% url 'audio_guest_book' %}" class="service-card-link">
+                <div class="service-card">
+                    <h3>Audio Guest Book</h3>
+                    <p>Capture heartfelt voice messages. Click to learn more.</p>
+                </div>
+            </a>
+            <a href="{% url 'photo_booth' %}" class="service-card-link">
+                <div class="service-card">
+                    <h3>Custom Photo Booths</h3>
+                    <p>Fun, interactive photo experiences. Click to learn more.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="events" class="event-list-section">
+        <h2 class="section-title">Public Events</h2>
+        <div class="event-list">
+            {% for event in events %}
+                <a href="{% url 'event_detail' event.unique_code %}" class="event-card">
+                    <h3>{{ event.name }}</h3>
+                    <p>{{ event.event_date }}</p>
+                </a>
+            {% empty %}
+                <p>There are no events currently available.</p>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

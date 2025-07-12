@@ -1,0 +1,36 @@
+{% extends "crowdcam_app/base.html" %}
+{% load static %} {% block content %}
+    <div class="service-page">
+        <h2 class="section-title">The Audio Guest Book</h2>
+
+        <div class="service-description">
+            <p>
+                Go beyond the written word. Our vintage-style audio guest book allows your friends and family to leave heartfelt, funny, and spontaneous voice messages on your special day. It's a time capsule of voices, laughter, and emotion that you can cherish forever.
+            </p>
+        </div>
+
+        <section class="service-gallery">
+            <h3 class="subsection-title">See It In Action</h3>
+            <div class="gallery-grid">
+                <img src="{% static 'images/audio-guestbook/agb-photo-1.jpg' %}" alt="Audio Guest Book at a wedding">
+                <img src="{% static 'images/audio-guestbook/agb-photo-2.jpg' %}" alt="Close up of the vintage phone">
+                <img src="{% static 'images/audio-guestbook/agb-photo-3.jpg' %}" alt="Guests leaving a message">
+                </div>
+        </section>
+        <div class="service-features">
+            <h3>What's Included?</h3>
+            <ul>
+                <li>A beautifully restored, easy-to-use vintage telephone.</li>
+                <li>A custom greeting message recorded in your own voice for your guests.</li>
+                <li>Unlimited recordings for the duration of your event.</li>
+                <li>All messages delivered to you as high-quality digital audio files.</li>
+            </ul>
+        </div>
+
+        <div class="service-cta">
+            <h3>Ready to capture the voices of your celebration?</h3>
+            <p>Contact us today for a personalized quote and to check availability for your event date.</p>
+            <a href="{% url 'contact' %}" class="button-primary">Request a Quote</a>
+        </div>
+    </div>
+{% endblock %}

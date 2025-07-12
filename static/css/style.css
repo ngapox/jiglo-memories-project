@@ -1,205 +1,490 @@
-/* static/css/style.css */
+/* ==========================================================================
+   JiGlo Memories - CrowdCam - Vibrant & Polished UI
+   ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* 1. Design System: Variables */
+:root {
+    --primary-navy: #0d1b2a;
+    --secondary-blue: #415a77;
+    --light-blue-grey: #778da9;
+    --background-cream: #f8f7f4;
+    --accent-gold: #e8b03e;
+    --accent-gold-hover: #f0c368;
+    --white: #ffffff;
 
+    --font-heading: 'Lora', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. General Body & Resets */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    max-width: 900px;
+    font-family: var(--font-body);
+    background-color: var(--background-cream);
+    background-image: url('../images/subtle-pattern.svg');
+    color: var(--secondary-blue);
+    line-height: 1.6;
+}
+
+
+main {
+    padding-top: 190px; 
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
 }
 
+a {
+    text-decoration: none; /* The key fix: removes all underlines */
+    color: var(--accent-gold);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-gold-hover); /* A slightly brighter gold on hover */
+}
+
+/* 3. Header & Navigation */
 .header {
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 1px solid #e0e0e0;
-    margin-bottom: 30px;
-}
-
-.header h1 {
-    font-size: 2.5em;
-    color: #2c3e50;
-    margin: 0;
-}
-
-.header p {
-    font-size: 1.1em;
-    color: #7f8c8d;
-}
-
-.upload-form {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 40px;
-}
-
-.upload-form h2 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #34495e;
-}
-
-button {
-    background-color: #3498db;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    transition: background-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-button:hover {
-    background-color: #2980b9;
-}
-
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.photo-grid img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.photo-grid img:hover {
-    transform: scale(1.05);
-}
-
-/* static/css/style.css (add to bottom) */
-.event-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.event-card {
-    background-color: #fff;
-    padding: 20px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.event-card h3 {
-    margin: 0 0 5px 0;
-    color: #3498db;
-}
-
-.event-card p {
-    margin: 0;
-    color: #7f8c8d;
-}
-
-/* static/css/style.css (add to bottom) */
-
-/* New Header Styles */
-.header {
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 20px;
 }
 
-.header .logo a {
-    text-decoration: none;
-    color: #2c3e50;
+.header .logo img { height: 150px; width: auto; display: block; }
+.main-nav { display: flex; align-items: center; gap: 25px; }
+.main-nav span { color: var(--secondary-blue); }
+.main-nav a, .logout-button {
+    font-weight: 600; font-size: 0.95em; color: var(--secondary-blue); transition: color 0.3s ease;
+}
+.logout-button { background: none; border: none; cursor: pointer; }
+.main-nav a:hover, .logout-button:hover { color: var(--primary-navy); }
+
+/* 4. Hero Section */
+.hero-section {
+    position: relative;
+    height: 60vh; max-height: 500px;
+    background-image: url('../images/hero-background.png'); /* Ensure your image name matches */
+    background-size: cover; background-position: center;
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+    margin: 20px;
 }
 
-.main-nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #3498db;
-    font-weight: 600;
+.hero-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.4));
+    border-radius: 24px;
 }
 
-.main-nav span {
-    color: #34495e;
+.hero-text-container { position: relative; z-index: 1; padding: 20px; }
+.hero-text h2 { font-size: 3em; font-family: var(--font-heading); color: var(--white); margin-bottom: 15px; }
+.hero-text p { font-size: 1.2em; max-width: 500px; margin: 0 auto 30px auto; opacity: 0.9; }
+
+/* 5. Informational Sections */
+.info-section, .event-list-section { padding: 80px 20px; }
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    text-align: center;
+    color: var(--primary-navy);
+    margin-bottom: 60px;
 }
 
-/* Form Container for Login/Signup */
-.form-container {
-    background-color: #fff;
-    padding: 40px;
+.steps-container, .services-container {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;
+}
+
+.step, .service-card { text-align: center; }
+.step-icon {
+    width: 60px; height: 60px;
+    background-color: var(--accent-gold);
+    color: var(--white);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 1.5em; font-weight: 700;
+    margin-bottom: 20px;
+}
+
+h3 { font-family: var(--font-heading); color: var(--primary-navy); font-size: 1.5em; }
+
+/* 6. Form & Button Styles */
+.form-container { background-color: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow-md); max-width: 550px; margin: 40px auto; }
+button, .button-primary {
+    background: var(--accent-gold); color: var(--white);
+    padding: 14px 20px; border: none; border-radius: 8px; cursor: pointer;
+    font-size: 1em; font-weight: 600; text-decoration: none; display: inline-block;
+    width: 100%; transition: all 0.3s ease;
+}
+.hero-button { width: auto; padding: 14px 30px; }
+button:hover, .button-primary:hover { background-color: var(--accent-gold-hover); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* 7. Event & Photo Grids */
+.event-list { display: flex; flex-direction: column; gap: 20px; max-width: 700px; margin: 0 auto; }
+.event-card {
+    background-color: var(--white); padding: 25px 30px; border-radius: 12px;
+    box-shadow: var(--shadow-sm); text-decoration: none; color: inherit; display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.event-card h3 { color: var(--primary-navy); }
+.event-card p { color: var(--light-blue-grey); }
+
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.photo-grid img {
+    width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
+    box-shadow: var(--shadow-sm); transition: transform 0.3s ease;
+}
+.photo-grid img:hover { transform: scale(1.05); }
+
+/* You may need to adjust the upload form layout on the event detail page */
+.event-title { text-align:center; margin-bottom: 40px;}
+.upload-form { max-width: 550px; margin: 0 auto 40px auto; background: var(--white); box-shadow: var(--shadow-md); }
+
+/* static/css/style.css (add to bottom) */
+
+/* Service Page Layout */
+.service-page {
+    background-color: var(--white);
+    padding: 50px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    max-width: 500px;
+    box-shadow: var(--shadow-sm);
+    max-width: 800px;
     margin: 40px auto;
 }
 
-/* static/css/style.css (add to bottom) */
-
-/* Style the logout button to look like a link */
-.logout-button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif; /* Use the same font */
-    color: #3498db; /* Use the same color as other links */
-    font-weight: 600; /* Match the font weight */
-    font-size: 1em; /* Match the font size */
-    cursor: pointer;
-    margin-left: 20px; /* Match the margin of other links */
+.service-description {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 40px;
 }
 
-.logout-button:hover {
-    text-decoration: underline;
+.service-features {
+    margin-bottom: 40px;
 }
 
-/* static/css/style.css (add to bottom) */
-
-/* Styles for form validation errors */
-.form-errors {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px;
+.service-features h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
     margin-bottom: 20px;
-    border: 1px solid #f5c6cb;
+}
+
+.service-features ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-features li {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.service-features li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+.service-cta {
+    text-align: center;
+    background-color: var(--background-cream);
+    padding: 30px;
     border-radius: 8px;
 }
 
-.form-errors ul {
-    margin: 0;
-    padding-left: 20px;
+.service-cta h3 {
+    margin-top: 0;
 }
 
-.dashboard-header {
+.service-cta .button-primary {
+    width: auto;
+    padding: 14px 40px;
+}
+
+/* static/css/style.css (add to bottom) */
+
+/* Service Page Gallery Styles */
+.service-gallery {
+    margin-bottom: 50px;
+}
+
+.subsection-title {
     text-align: center;
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+    font-size: 1.8em;
     margin-bottom: 30px;
 }
-.button-primary {
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* static/css/style.css (add to bottom) */
+
+/* Dropdown Menu Styles */
+.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    min-width: 200px;
+    z-index: 1001;
+    padding: 10px 0;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 20px;
+    color: var(--primary-navy);
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background-color: var(--background-cream);
+}
+
+/* Show the dropdown on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* New Modern Form Styles */
+.form-subheading {
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    color: var(--secondary-blue);
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--primary-navy);
+}
+
+/* This styles all text, password, email, and number inputs */
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dde2e7;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1em;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Important for consistent sizing */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(232, 176, 62, 0.25);
+}
+
+.help-text {
+    display: block;
+    font-size: 0.8em;
+    color: var(--light-blue-grey);
+    margin-top: 8px;
+    padding-left: 2px;
+}
+
+.field-error {
+    color: var(--danger-red);
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.form-alternate-action {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--off-white);
+    font-size: 0.95em;
+}
+
+/* static/css/style.css (add to bottom) */
+.notice-box {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--white);
+    border: 2px dashed var(--accent-gold);
+    border-radius: 12px;
+    max-width: 550px;
+    margin: 40px auto;
+}
+.notice-box h4 {
+    margin-top: 0;
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+    font-size: 1.5em;
+}
+.notice-box .button-secondary {
+    width: auto;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   8. Dashboard Specific Styles
+   ========================================================================== */
+
+.event-card-dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card-dashboard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.event-info h3 { 
+    margin: 0 0 5px 0; 
+    color: var(--primary-navy); 
+}
+.event-info p { 
+    margin: 0; 
+    color: var(--light-blue-grey);
+}
+
+.event-status { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.status-badge {
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.status-badge.active { 
+    background-color: #e4f8f0; 
+    color: #27ae60; 
+}
+.status-badge.inactive { 
+    background-color: #fdecea; 
+    color: #c0392b; 
+}
+
+.button-secondary { /* For the 'View Gallery' button */
     display: inline-block;
-    background-color: #2ecc71;
+    background-color: var(--light-blue-grey);
     color: white;
-    padding: 12px 25px;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
-.button-primary:hover {
-    background-color: #27ae60;
+.button-secondary:hover { 
+    background-color: var(--secondary-blue); 
+}
+
+.button-secondary.edit {
+    background-color: var(--secondary-blue);
+}
+.button-secondary.edit:hover {
+    background-color: var(--primary-navy);
+}
+
+.button-danger {
+    display: inline-block;
+    background-color: var(--danger-red);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.button-danger:hover {
+    background-color: #a8332a; /* A darker red */
+    box-shadow: var(--shadow-sm);
+}
+
+.button-secondary.qr {
+    background-color: #34495e;
+}
+.button-secondary.qr:hover {
+    background-color: var(--primary-navy);
 }
