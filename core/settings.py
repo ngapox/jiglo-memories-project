@@ -155,13 +155,12 @@ STRIPE_WEBHOOK_SECRET = ''
 
 # core/settings.py (at the bottom)
 
-# core/settings.py (at the bottom)
-
 # CLOUDINARY STORAGE SETTINGS
 # ------------------------------------------------------------------------------
 CLOUDINARY_STORAGE = {
-    # This dictionary is now the main configuration
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL', '')
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
 # This tells Django to use Cloudinary for all user-uploaded files (media)
