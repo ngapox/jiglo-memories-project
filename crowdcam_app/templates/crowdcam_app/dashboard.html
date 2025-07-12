@@ -23,7 +23,10 @@
                         <a href="{% url 'event_delete' event.id %}" class="button-danger">Delete</a>
                     {% else %}
                         <span class="status-badge inactive">Inactive</span>
-                        <a href="{% url 'create_checkout_session' event.id %}" class="button-primary">Pay to Activate</a>
+                        <form action="{% url 'create_checkout_session' event.id %}" method="post" style="margin: 0;">
+                            {% csrf_token %}
+                            <button type="submit" class="button-primary">Pay to Activate</button>
+                        </form>
                         <a href="{% url 'event_update' event.id %}" class="button-secondary edit">Edit</a>
                     {% endif %}
                 </div>

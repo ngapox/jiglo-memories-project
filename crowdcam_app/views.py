@@ -134,47 +134,50 @@ def thank_you_view(request):
 
 @login_required
 def create_checkout_session_view(request, event_id):
-    event = get_object_or_404(Event, id=event_id, host=request.user)
+    if request.method == 'POST':
+        event = get_object_or_404(Event, id=event_id, host=request.user)
 
-    # Configure the Stripe API key
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+        # Configure the Stripe API key
+        stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # Build the URLs for success and cancellation
-    success_url = request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}'
-    cancel_url = request.build_absolute_uri(reverse('dashboard'))
+        # Build the URLs for success and cancellation
+        success_url = request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}'
+        cancel_url = request.build_absolute_uri(reverse('dashboard'))
 
-    # Define the product and price for Stripe
-    line_items = [{
-        'price_data': {
-            'currency': 'usd', # You can change this to your local currency if supported
-            'product_data': {
-                'name': f"Activation for event: {event.name}",
+        # Define the product and price for Stripe
+        line_items = [{
+            'price_data': {
+                'currency': 'usd', # You can change this to your local currency if supported
+                'product_data': {
+                    'name': f"Activation for event: {event.name}",
+                },
+                'unit_amount': int(event.price * 100), # Price in cents
             },
-            'unit_amount': int(event.price * 100), # Price in cents
-        },
-        'quantity': 1,
-    }]
+            'quantity': 1,
+        }]
 
-    try:
-        # Create a new Checkout Session with the Stripe API
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=line_items,
-            mode='payment',
-            success_url=success_url,
-            cancel_url=cancel_url,
-            client_reference_id=event.id # Pass the event ID to track the payment
-        )
+        try:
+            # Create a new Checkout Session with the Stripe API
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=line_items,
+                mode='payment',
+                success_url=success_url,
+                cancel_url=cancel_url,
+                client_reference_id=event.id # Pass the event ID to track the payment
+            )
 
-        # Save the checkout session ID to our event model
-        event.stripe_checkout_id = checkout_session['id']
-        event.save()
+            # Save the checkout session ID to our event model
+            event.stripe_checkout_id = checkout_session['id']
+            event.save()
 
-        # Redirect the user to the Stripe-hosted checkout page
-        return redirect(checkout_session.url, code=303)
-    except Exception as e:
-        # Handle any errors here (e.g., log them, show a generic error page)
-        return render(request, 'crowdcam_app/generic_error.html', {'error': str(e)})
+            # Redirect the user to the Stripe-hosted checkout page
+            return redirect(checkout_session.url, code=303)
+        except Exception as e:
+            # Handle any errors here (e.g., log them, show a generic error page)
+            return render(request, 'crowdcam_app/generic_error.html', {'error': str(e)})
+    # If it's not a POST request, just redirect back to the dashboard
+    return redirect('dashboard')
 # crowdcam_app/views.py
 
 def payment_success_view(request):
