@@ -140,8 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # core/settings.py (at the bottom)
 
 # Media files (user-uploaded content)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -155,12 +153,16 @@ STRIPE_WEBHOOK_SECRET = ''
 
 # core/settings.py (at the bottom)
 
+# core/settings.py (at the bottom)
+
 # CLOUDINARY STORAGE SETTINGS
 # ------------------------------------------------------------------------------
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+    # This line below is the new, crucial fix
+    'ENVIRONMENT_VARIABLE': 'DO_NOT_READ_CLOUDINARY_URL',
 }
 
 # This tells Django to use Cloudinary for all user-uploaded files (media)
