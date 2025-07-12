@@ -24,7 +24,7 @@
                     <div class="dropdown-menu">
                         <a href="{% url 'audio_guest_book' %}" class="dropdown-item">Audio Guest Book</a>
                         <a href="{% url 'photo_booth' %}" class="dropdown-item">Photo Booth</a>
-                        <a href="{% url 'homepage' %}#events" class="dropdown-item">CrowdCam Events</a>
+                        <a href="{% url 'crowdcam' %}" class="dropdown-item">CrowdCam</a>
                     </div>
                 </div>
 
@@ -32,10 +32,15 @@
 
                 {% if user.is_authenticated %}
                     <a href="{% url 'dashboard' %}" class="nav-link">My Events</a>
+
+                    {% if user.is_staff %}
+                        <a href="{% url 'admin:index' %}" class="nav-link">Admin Panel</a>
+                    {% endif %}
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="logout-button">Log Out</button>
                     </form>
+
                 {% else %}
                     <a href="{% url 'login' %}" class="nav-link">Log In</a>
                     <a href="{% url 'signup' %}" class="nav-link">Sign Up</a>
