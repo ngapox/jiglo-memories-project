@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',           # For Cloudinary file handling
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',   # <-- This now comes FIRST
+    'cloudinary_storage',         # <-- This comes AFTER
     'crowdcam_app',
-    'cloudinary',                   # The main Cloudinary app
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
