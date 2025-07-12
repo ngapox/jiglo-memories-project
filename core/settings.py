@@ -27,7 +27,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)kaed75@0r17o4c3vh(ok
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['https://jiglo-memories.onrender.com']
+ALLOWED_HOSTS = [
+    'jiglo-memories.onrender.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
