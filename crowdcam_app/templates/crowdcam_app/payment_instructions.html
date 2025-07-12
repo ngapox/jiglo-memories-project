@@ -1,0 +1,27 @@
+{% extends "crowdcam_app/base.html" %}
+
+{% block content %}
+    <div class="service-page">
+        <h2 class="section-title">Activate Your Event</h2>
+        <h3 class="subsection-title">"{{ event.name }}"</h3>
+
+        <div class="service-description">
+            <p>To finalize and activate your event, please complete the payment manually using the details below. Once your payment is confirmed, we will activate your event gallery within 24 hours.</p>
+        </div>
+
+        <div class="service-features">
+            <h3>Payment Details</h3>
+            <ul>
+                <li><strong>Service:</strong> CrowdCam Event Activation</li>
+                <li><strong>Amount:</strong> {{ event.price }} TZS (or your currency)</li>
+                <li><strong>M-Pesa Lipa Namba (RoPhi Studio):</strong> 5319646</li>
+            </ul>
+        </div>
+
+        <div class="service-cta">
+            <h3>What's Next?</h3>
+            <p>After you have sent the payment, please allow us some time to verify and activate your event. You can check the status on your dashboard.</p>
+            <a href="{% url 'dashboard' %}" class="button-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+{% endblock %}

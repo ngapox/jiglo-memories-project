@@ -15,7 +15,8 @@ urlpatterns = [
     path('contact/thank-you/', views.thank_you_view, name='thank_you'),
     path('create-checkout-session/<int:event_id>/', views.create_checkout_session_view, name='create_checkout_session'),
     path('payment-success/', views.payment_success_view, name='payment_success'),
-    path('events/<slug:unique_code>/', views.event_detail_view, name='event_detail'),
     path('my-events/<int:event_id>/edit/', views.event_update_view, name='event_update'),
     path('my-events/<int:event_id>/delete/', views.event_delete_view, name='event_delete'),
+    path('my-events/<int:event_id>/payment-instructions/', views.payment_instructions_view, name='payment_instructions'),
+    path('events/<slug:unique_code>/', views.event_detail_view, name='event_detail'),
 ]
