@@ -157,14 +157,14 @@ STRIPE_WEBHOOK_SECRET = ''
 # core/settings.py (at the bottom)
 # This block replaces all previous Cloudinary and Media settings
 
-# CLOUDINARY AND MEDIA SETTINGS
+# CLOUDINARY, STATIC, AND MEDIA SETTINGS
 # ------------------------------------------------------------------------------
 if 'CLOUDINARY_URL' in os.environ:
-    # We are in production on Render, use Cloudinary
+    # We are in production on Render, use Cloudinary for all storage
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    # The CLOUDINARY_URL environment variable is read automatically by the Cloudinary library
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage' # <-- ADD THIS LINE
 else:
-    # We are on our local computer, use local media storage
+    # We are on our local computer, use local media and static storage
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
