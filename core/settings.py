@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
-    'storages',
     'cloudinary',
 ]
 
@@ -155,15 +154,17 @@ STRIPE_WEBHOOK_SECRET = ''
 
 # core/settings.py (at the bottom)
 
-# CLOUDINARY STORAGE SETTINGS
-# ------------------------------------------------------------------------------
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-    # This line below is the new, crucial fix
-    'ENVIRONMENT_VARIABLE': 'DO_NOT_READ_CLOUDINARY_URL',
-}
+# core/settings.py (at the bottom)
+# This block replaces all previous Cloudinary and Media settings
 
-# This tells Django to use Cloudinary for all user-uploaded files (media)
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# CLOUDINARY AND MEDIA SETTINGS
+# ------------------------------------------------------------------------------
+if 'CLOUDINARY_URL' in os.environ:
+    # We are in production on Render, use Cloudinary
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    # The CLOUDINARY_URL environment variable is read automatically by the Cloudinary library
+else:
+    # We are on our local computer, use local media storage
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
