@@ -488,3 +488,31 @@ button:hover, .button-primary:hover { background-color: var(--accent-gold-hover)
 .button-secondary.qr:hover {
     background-color: var(--primary-navy);
 }
+
+/* ==========================================================================
+   9. Mobile Responsive Styles
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .hero-section {
+        /* Let the hero section grow taller if the text wraps */
+        height: auto;
+        min-height: 300px;
+        padding: 40px 20px;
+    }
+
+    .hero-text h2 {
+        /* Make the main headline smaller on mobile */
+        font-size: 2.2em;
+    }
+
+    .hero-text p {
+        /* Make the sub-headline smaller on mobile */
+        font-size: 1em;
+    }
+
+    /* Optional: Hide the long "Welcome" message on mobile to save space */
+    .main-nav span {
+        display: none;
+    }
+}
